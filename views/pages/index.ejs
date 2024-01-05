@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <title>Sails URL Short'nr</title>
+</head>
+<body>
+  <main class="py-6 px-24 flex items-center flex-col">
+    <h1 class="text-2xl text-gray-700">Short'n your URL mate!</h1>
+    <form action="/shorturl" method="POST" class="my-4 flex space-x-2 w-1/2" autocomplete="off">
+      <label for="url" class="sr-only">URL</label>
+      <input type="url" name="url" id="url" placeholder="https://sailscasts.com" required
+        class="border px-4 py-2 rounded-full flex-1 focus:outline-none">
+      <button type="submit" class="text-white px-4 py-2 rounded-full bg-blue-400 hover:bg-blue-500">Short'n</button>
+    </form>
+    <table class="w-1/2">
+      <thead class="text-left text-gray-600">
+        <th>URL</th>
+        <th>Short URL</th>
+        <th>Clicks</th>
+      </thead>
+        <!--  -->
+
+        <% shortUrls.forEach(shortUrl=> { %>
+          <tr>
+            <td><a href="<%= shortUrl.url %>" class="text-blue-400" target="_blank">
+                <%= shortUrl.url %>
+              </a></td>
+            <td><a href="<%= shortUrl.short %>" class="text-blue-500" target="_blank">
+                <%= shortUrl.short %>
+              </a></td>
+            <td>
+              <% if (shortUrl.clicks) { %>
+                <span class="text-green-400">
+                  <%= shortUrl.clicks %>
+                </span>
+                <% } else { %>
+                  <span class="text-gray-600">
+                    <%= shortUrl.clicks %>
+                  </span>
+                  <% } %>
+            </td>
+          </tr>
+          <% }) %>
+    </table>
+
+    
+  </main>
+</body>
+</html>
